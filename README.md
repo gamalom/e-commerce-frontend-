@@ -6,6 +6,12 @@ How to run the project
 2. npm install
 3. npm run dev
    4 open in the localhost
+4. user login
+   sunil@gmail.com
+   sunil@123
+5. admin login
+   om.gamal10@gmail.com  
+   admin@123
 
 extra
 Cookie and localStorage
