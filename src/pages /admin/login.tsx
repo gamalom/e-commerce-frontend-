@@ -1,25 +1,26 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { loginUser } from "../../store/authSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Status } from "../../globals/types/type";
 
-function Login() {
+function AdminLogin() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { status, user } = useAppSelector((store) => store.auth);
-
-  useEffect(() => {
-    if (status === Status.SUCCESS && localStorage.getItem("tokenHoYo")) {
-      // Handle successful login
-      navigate("../");
-    }
-  }, [status, navigate]);
 
   const [data, setData] = useState({
     password: "",
     email: "",
   });
+
+  useEffect(() => {
+    if (status === Status.SUCCESS) {
+      navigate("/admin/products");
+    } else if (status === Status.ERROR) {
+      alert("Something went wrong");
+    }
+  }, [status]);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setData({
@@ -94,9 +95,6 @@ function Login() {
                 Login Account
               </button>
             </div>
-            <p className="text-blue-500">
-              Wanna Register? <Link to="/register"> Go to Register</Link>
-            </p>
           </form>
         </div>
       </div>
@@ -104,4 +102,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default AdminLogin;
